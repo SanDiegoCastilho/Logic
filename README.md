@@ -1,14 +1,22 @@
-# Logic
-Lista 03 Tópicos em Lógica
+# Questão 01a (esse assunto é muito foda!)
 
-Questões 1 e 3
-Bova, Capelli, Mengel e Slivovsky provaram que existem fórmulas que conseguem ser escritas de forma compacta no formato PI, mas que quando você tenta converter para o formato DNNF, a representação explode exponencialmente de tamanho. A função testemunha usada é baseada em grafos que tem uma descrição PI pequena, mas não tem jeito de representar em DNNF sem crescer exponencialmente.. (https://arxiv.org/pdf/1411.1995)
+1. Uma fórmula sd-DNNF pode ser transformada em um counting graph, onde cada nó OR se torna uma soma (+) e cada nó AND se torna uma multiplicação (*).
+2. Dessa forma, a fórmula lógica passa a representar uma função aritmética, permitindo calcular o número de modelos satisfatórios da teoria eficientemente.
+3. Cada literal pertencente a S (conj. de evidências) é considerado verdadeiro na fórmula. A função (G(S)) representa o número de modelos compatíveis com as evidências presentes em (S).
+4. A derivada parcial: mede quanto o número de modelos quando o literal l é imposto como verdadeiro. Ela indica quantos modelos permanecem válidos quando o literal l é afirmado como verdadeiro.
+5. Assertion é a operação de adicionar uma nova evidência ao conjunto S, ou seja, adicionar um novo literal assumido como verdadeiro.
+6. Retraction é a operação inversa: remover uma evidência previamente assumida em S, permitindo novamente que o literal possa assumir valores verdadeiro ou falso.
+7. As derivadas parciais permitem realizar assertion e retraction eficientemente sem recompilar toda a teoria lógica, apenas propagando valores no counting graph.
 
-Bova usa uma função de Sauerhoff,  uma função sobre matrizes n×n de variáveis boolenas,  para provar uma separação exponencial de DNNF em relação a d-DNNF (deterministic DNNF). Isso foi obtido conectando compilação de conhecimento a técnicas de communication complexity. (https://www.ijcai.org/Proceedings/16/Papers/147.pdf)
+# Questão 01b
+1. Suponha a fórmula F = (A ∧ B) ∨ (A ∧ ~B)
+2. Essa fórmula pode assumir a forma de um counting graph ===> (A * B) + (A * ~B)
+3. Suponha S = {}, então G(S) para a fórmula F é: 2.
+4. Suponha Assertion A, ou seja, S = {A}, ainda dois modelos possíveis ==> (A=1, B=0), ou seja, G(S) = 2
+5. Suponha Assertion B, ou seja, S = {A, B}. Temos que o modelo possível é (A=1, B=1), logo, G(S) = 1
+6. Derivada de G em relação a A: B + ~B = 2
+7. Derivada de G em relação a B: A = 1
 
-Trabalhos posteriores confirmaram que d-DNNF suporta em polytime as verificações de consistência (CO), validade (VA), entailment clausal (CE), implicant (IM), contagem de modelos (CT) e enumeração de modelos (ME) (https://arxiv.org/pdf/2603.09975v2)
-
-Questão 02
-Decomposable: (A v B v C) ^ (B v D v E)
-Deterministic: (~A ^ B) v (D ^ C)
-Smoothness: (A ^ B) v (C ^ D)
+# Questão 03a
+1. O c2d se utiliza da caracteristica da decomposabilidade para separar em subfórmulas menores, transformar em d-DNNF e depois unir os resultados com um AND. 
+2. Já o DSHARP utiliza técnicas mais atualizadas como: Implicit Binary Constraint Propagation, Conflict Analysis / Non-Chronological Backtracking, 
